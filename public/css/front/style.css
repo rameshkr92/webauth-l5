@@ -11319,3 +11319,15 @@ a.big-icon:hover {
 .signup-page-otr{
   height: 855px;
 }
+/********RAMESH**********/
+.header-drop-menu a{
+  color: #000 !important;
+}
+.top-navbar .nav > li a{
+  color: #000;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #FCFCFC;
+  color: #000;
+}

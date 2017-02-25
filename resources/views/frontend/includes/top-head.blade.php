@@ -48,10 +48,14 @@
                                     <li>{!! HTML::link(url('/register'), Lang::get('titles.register')) !!}</li>
                                 @else
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>{!! HTML::link(url('/profile/'.Auth::user()->name), Lang::get('titles.profile')) !!}</li>
-                                            <li>{!! HTML::link(url('/logout'), Lang::get('titles.logout')) !!}</li>
+                                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>--}}
+                                        <a class="btn dropdown-toggle btn-default" role="button" data-toggle="dropdown" href="#">
+                                            <span class="hidden-xs">{{ Auth::user()->username }}</span>
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu header-drop-menu" role="menu">
+                                            <li><a href="{{url('/profile/'.Auth::user()->username)}}"><span class="fa fa-user"></span> {{Lang::get('titles.profile')}}</a></li>
+                                            <li><a href="{{url('/logout')}}"><span class="fa fa-sign-out"></span> {{Lang::get('titles.logout')}}</a></li>
                                         </ul>
                                     </li>
                                 @endif
