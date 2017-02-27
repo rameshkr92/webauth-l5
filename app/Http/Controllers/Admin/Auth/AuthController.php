@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Admin\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Admin\User;
 use Validator;
-use App\Admin\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -61,12 +61,20 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    /*protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }*/
+    public function showLoginForm()
+    {
+        dd("sdad");
+        if (view()->exists('auth.authenticate')) {
+            return view('auth.authenticate');
+        }
+        return view('admin.pages.auth.login');
     }
 }

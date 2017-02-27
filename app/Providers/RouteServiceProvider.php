@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Request;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         //
-
         parent::boot($router);
     }
 
@@ -37,13 +37,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $router->group(['namespace' => 'App\Http\Controllers\Admin'], function ($router) {
+        /*$router->group(['namespace' => 'App\Http\Controllers\Admin'], function ($router) {
             require app_path('Http/routes.php');
         });
 
         $router->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($router) {
             require app_path('Http/routes.php');
-        });
+        });*/
         /*$router->group(['namespace' => 'App\Admin\Http\Controllers'], function ($router) {
             require app_path('Admin/Http/routes.php');
         });
@@ -54,6 +54,42 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->group(['namespace' => 'App\API\Http\Controllers'], function ($router) {
             require app_path('API/Http/routes.php');
+        });*/
+        $this->mapWebRoutes($router);
+    }
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @param  \Illuminate\Routing\Router  $router
+     * @return void
+     */
+    protected function mapWebRoutes(Router $router)
+    {
+//        dd(Request::segment(1));
+        /*$router->group([
+            'namespace' => $this->namespace, 'middleware' => 'web',
+        ], function ($router) {
+            require app_path('Http/routes.php');
+        });*/
+        if(Request::segment(1)!="admin"){
+            $router->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($router) {
+                require app_path('Http/routes.php');
+            });
+        }else{
+            $router->group([
+                'namespace' => $this->namespace, 'middleware' => 'web',
+            ], function ($router) {
+                require app_path('Http/routes.php');
+            });
+        }
+        /*$router->group(['namespace' => 'App\Http\Controllers\Admin'], function ($router) {
+            require app_path('Http/routes.php');
+        });
+
+        $router->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($router) {
+            require app_path('Http/routes.php');
         });*/
     }
 }

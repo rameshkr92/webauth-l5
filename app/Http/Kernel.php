@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Frontend\Http;
+namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -32,10 +32,9 @@ class Kernel extends HttpKernel
 //            \App\Frontend\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
         ],
-
-        'api' => [
+        /*'api' => [
             'throttle:60,1',
-        ],
+        ],*/
     ];
 
     /**
@@ -52,6 +51,6 @@ class Kernel extends HttpKernel
 //        'guest' => \App\Frontend\Http\Middleware\RedirectIfAuthenticated::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'acl' => \App\Http\Middleware\CheckPermission::class,
+        'acl' => 'App\Http\Middleware\CheckPermission',
     ];
 }
